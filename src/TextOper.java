@@ -1,5 +1,5 @@
 /**
- * Created by AlexAbril on 8/3/17.
+ * Created by prubac on 3/8/2017.
  */
 public class TextOper {
 
@@ -19,7 +19,6 @@ public class TextOper {
 
         int s4len = s4.length();
 
-
         System.out.println(s3);
         System.out.println(posBC);
         System.out.println(s4);
@@ -29,17 +28,15 @@ public class TextOper {
 
         System.out.println(c1);
 
-        // && - AND
-        // || - OR
+        // &&  - AND
+        // ||  - OR
 
         if (s4.contains("F") && (s4.length() < 7)) {
             System.out.println("s4 contains F");
         } else {
             System.out.println("s4 doesn't contain F");
         }
+
+
     }
-
 }
-
-
-
