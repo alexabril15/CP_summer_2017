@@ -1,3 +1,7 @@
+package bank;
+
+import bank.exceptions.BankException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,47 @@ public class Bank {
         accountList.add(acc);
         return acc;
     }
+
+    public void transfer(Long accIdFrom,
+                         Long accIdTo, Double amount)
+            throws BankException {
+        Account fromAcc = findAccountById(accIdFrom);
+        Account toAcc = findAccountById(accIdTo);
+        if (!fromAcc.getCurrency().equals(toAcc.getCurrency()))
+            throw new BankException("Currencies don't match, from: "
+                    + fromAcc.getCurrency() + " to: "
+                    + toAcc.getCurrency());
+        fromAcc.charge(amount);
+        toAcc.deposit(amount);
+    }
+
+    private Account findAccountById(Long accId)
+            throws BankException {
+        for (Account acc : accountList) {
+            if (acc.getAccountId().equals(accId))
+                return acc;
+        }
+        throw new BankException("Account ID: " + accId +
+                " not found!");
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public List<Account> getAccountListForCustomer(Customer customer) {
+        List<Account> custAccounts = new ArrayList<>();
+        for (Account acc : accountList) {
+            if (acc.getCustomer().equals(customer))
+                custAccounts.add(acc);
+        }
+        return custAccounts;
+    }
+
 
     @Override
     public String toString() {
